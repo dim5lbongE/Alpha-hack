@@ -70,7 +70,7 @@ class $modify(NovaSimulation,GJBaseGameLayer){
   if(m_resumeTimer>0){--m_resumeTimer;dt=0;}
   double remaining=m_extraDelta;
   auto batch=core::advance(dt,nova::c.tps,m_gameState.m_timeWarp,remaining);
-  m_extraDelta=remaining;physics::expectedTicks=batch.ticks;return batch.delta;
+  m_extraDelta=remaining;physics::expectedTicks=std::max(1u,batch.ticks);return batch.delta;
  }
  void update(float dt){
   auto p=PlayLayer::get();bool active=p&&static_cast<GJBaseGameLayer*>(p)==this&&!p->m_isPaused&&!p->m_hasCompletedLevel;
@@ -80,6 +80,7 @@ class $modify(NovaSimulation,GJBaseGameLayer){
   bool custom=physics::ready&&core::customTPS(nova::c.tpsBypass,nova::c.tps)&&m_started&&!m_isEditor;
   double rate=custom?nova::c.tps:240.;if(m_fields->lastRate!=rate){m_extraDelta=0;m_fields->lastRate=rate;}
   const auto previous=nova::tpsContext;
+  physics::expectedTicks=1; // Native code divides by this count, including zero-delta frames.
   physics::Scope patchScope(custom);nova::tpsContext={this,patchScope.enabled};
   bool track=nova::c.noclip&&dt>0&&!p->m_inResetDelay&&p->m_player1&&!p->m_player1->m_isDead;
   GJBaseGameLayer::update(dt);
