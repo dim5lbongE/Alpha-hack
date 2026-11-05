@@ -6,9 +6,9 @@
   },
   "id": "dim5l.practice_sync",
   "name": "Alpha hack lite",
-  "version": "3.0.0-beta.1",
+  "version": "3.1.0-beta.1",
   "developer": "dim5l",
-  "description": "Only icon unlocks and practice music sync, using Geode settings.",
+  "description": "Icon unlocks, practice music sync and copy bypass in Geode settings.",
   "settings": {
     "unlock-icons": {
       "name": "Unlock Icons",
@@ -19,6 +19,11 @@
       "name": "Practice Music Sync",
       "type": "bool",
       "default": true
+    },
+    "copy-bypass": {
+      "name": "Copy Bypass",
+      "type": "bool",
+      "default": false
     }
   }
 }

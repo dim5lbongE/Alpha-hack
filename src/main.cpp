@@ -2,6 +2,7 @@
 #include <Geode/loader/SettingV3.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include <Geode/modify/PlayLayer.hpp>
+#include <Geode/modify/LevelInfoLayer.hpp>
 using namespace geode::prelude;
 
 class $modify(LiteIcons, GameManager) {
@@ -46,6 +47,34 @@ class $modify(LitePractice, PlayLayer) {
     void resetLevel() {
         PlayLayer::resetLevel();
         applyMusicSetting();
+    }
+};
+
+// Keep downloaded level metadata unchanged outside the copy UI operation.
+namespace {
+struct CopyPermission {
+    GJGameLevel* level;
+    int password;
+    explicit CopyPermission(GJGameLevel* value) : level(value), password(value ? value->m_password : 0) {
+        if (level) level->m_password = 1;
+    }
+    ~CopyPermission() { if (level) level->m_password = password; }
+};
+}
+class $modify(LiteCopy, LevelInfoLayer) {
+    bool init(GJGameLevel* level, bool challenge) {
+        if (!level || !Mod::get()->getSettingValue<bool>("copy-bypass"))
+            return LevelInfoLayer::init(level, challenge);
+        CopyPermission permission(level);
+        return LevelInfoLayer::init(level, challenge);
+    }
+    void tryCloneLevel(CCObject* sender) {
+        if (!m_level || !Mod::get()->getSettingValue<bool>("copy-bypass")) {
+            LevelInfoLayer::tryCloneLevel(sender);
+            return;
+        }
+        CopyPermission permission(m_level);
+        LevelInfoLayer::tryCloneLevel(sender);
     }
 };
 

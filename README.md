@@ -6,7 +6,9 @@ Open **Geode → Installed → Alpha hack lite → Settings**.
 - **Unlock Icons**: icons and colors, without changing completion records.
 - **Practice Music Sync**: overrides practice music sync while enabled; disabling restores the underlying game option.
 
-Only these two settings remain. No CBF, custom menu, Tab handler, floating buttons, HUD, cheat indicator, speedhack, TPS/FPS bypass, VSync/Smooth Fix override, song replacement or main-level unlocks.
+- **Copy Bypass**: permits copying protected levels without entering a password. Enable it before opening the level info page.
+
+Only these three settings remain. No CBF, custom menu, Tab handler, floating buttons, HUD, cheat indicator, speedhack, TPS/FPS bypass, VSync/Smooth Fix override, song replacement or main-level unlocks.
 
 The existing mod ID is retained so Lite replaces the full version after restarting GD. Old full-version settings are ignored.
 
