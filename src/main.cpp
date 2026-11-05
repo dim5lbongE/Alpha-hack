@@ -18,13 +18,15 @@ class $modify(LiteIcons, GameManager) {
 };
 
 class $modify(LitePractice, PlayLayer) {
-    struct Fields { bool nativeSync = false; };
+    struct Fields { bool nativeSync = false; bool ready = false; };
     void applyMusicSetting() {
+        if (!m_fields->ready) return;
         m_practiceMusicSync = Mod::get()->getSettingValue<bool>("enabled") || m_fields->nativeSync;
     }
     bool init(GJGameLevel* level, bool dontCreate) {
         if (!PlayLayer::init(level, dontCreate)) return false;
         m_fields->nativeSync = m_practiceMusicSync;
+        m_fields->ready = true;
         applyMusicSetting();
         return true;
     }
@@ -34,6 +36,7 @@ class $modify(LitePractice, PlayLayer) {
         applyMusicSetting();
     }
     void toggleMusicInPractice() {
+        if (!m_fields->ready) { PlayLayer::toggleMusicInPractice(); return; }
         // Let the game's own option retain its value under the override.
         m_practiceMusicSync = m_fields->nativeSync;
         PlayLayer::toggleMusicInPractice();
