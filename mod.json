@@ -5,112 +5,20 @@
     "win": "2.2091"
   },
   "id": "dim5l.practice_sync",
-  "name": "Alpha hack",
-  "version": "2.3.1-beta.1",
+  "name": "Alpha hack lite",
+  "version": "3.0.0-beta.1",
   "developer": "dim5l",
-  "description": "Clean controls, mobile menu button and attempt-aware red/green indicator.",
+  "description": "Only icon unlocks and practice music sync, using Geode settings.",
   "settings": {
+    "unlock-icons": {
+      "name": "Unlock Icons",
+      "type": "bool",
+      "default": false
+    },
     "enabled": {
       "name": "Practice Music Sync",
       "type": "bool",
       "default": true
-    },
-    "noclip": {
-      "name": "Noclip",
-      "type": "bool",
-      "default": false
-    },
-    "speedhack": {
-      "name": "Speedhack",
-      "type": "bool",
-      "default": false
-    },
-    "audio-speed": {
-      "name": "Audio follows speed",
-      "type": "bool",
-      "default": true
-    },
-    "fps-bypass": {
-      "name": "FPS bypass",
-      "type": "bool",
-      "default": false,
-      "description": "Render cap only, not physics TPS; hardware and driver limits still apply."
-    },
-    "show-fps": {
-      "name": "Show FPS",
-      "type": "bool",
-      "default": true
-    },
-    "show-clock": {
-      "name": "Show clock",
-      "type": "bool",
-      "default": true
-    },
-    "cheat-indicator": {
-      "name": "Cheat indicator",
-      "type": "bool",
-      "default": true,
-      "description": "Tracks Alpha hack only, not other mods. Modified practice checkpoints remain marked."
-    },
-    "show-accuracy": {
-      "name": "Noclip accuracy",
-      "type": "bool",
-      "default": true,
-      "description": "Collision-free updates / tracked noclip updates; not frame-window analysis."
-    },
-    "hitboxes": {
-      "name": "Show hitboxes",
-      "type": "bool",
-      "default": false
-    },
-    "unlock-icons": {
-      "name": "Unlock icons and colors",
-      "type": "bool",
-      "default": false
-    },
-    "unlock-levels": {
-      "name": "Unlock main levels",
-      "type": "bool",
-      "default": false
-    },
-    "speed": {
-      "name": "Speed multiplier",
-      "type": "float",
-      "default": 1.0,
-      "min": 0.1,
-      "max": 5.0
-    },
-    "fps-target": {
-      "name": "FPS target",
-      "type": "int",
-      "default": 240,
-      "min": 30,
-      "max": 2000
-    },
-    "vertical-sync": {
-      "name": "Vertical Sync (Windows)",
-      "type": "bool",
-      "default": false,
-      "description": "Android synchronization is managed by the OS."
-    },
-    "smooth-fix": {
-      "name": "Smooth Fix",
-      "type": "bool",
-      "default": false
-    },
-    "tps-bypass": {
-      "name": "TPS bypass",
-      "type": "bool",
-      "default": false,
-      "description": "Custom physics steps (120-1000 TPS). Experimental; marked as modified/safe mode. Disable other physics bypass mods."
-    },
-    "tps-target": {
-      "name": "TPS target",
-      "type": "int",
-      "default": 240,
-      "min": 120,
-      "max": 1000,
-      "description": "240 uses native physics, and targets other than 240 are experimental."
     }
   }
 }

@@ -1,17 +1,15 @@
-# Alpha hack
-Geode mod for Geometry Dash 2.2091. Windows x64 and Android ARM64 share one source tree and one universal package.
+# Alpha hack lite
+GD 2.2091 / Geode 6.0.0-alpha.1. Windows x64 + Android ARM64.
 
-Download the `.geode` asset from [Releases](https://github.com/dim5lbongE/Alpha-hack/releases). Import it into Geode 6.0.0-alpha.1. Do not install the historical build-kit ZIP as a mod.
+Open **Geode → Installed → Alpha hack lite → Settings**.
 
-Open with **Tab** on desktop or the **circular menu** button on mobile. Play / Speed / Video / Physics / HUD / Unlocks / Songs separate the controls. FPS and TPS have numeric inputs; speed uses a slider and presets. Song replacement uses Geode's file picker and keeps originals intact.
+- **Unlock Icons**: icons and colors, without changing completion records.
+- **Practice Music Sync**: overrides practice music sync while enabled; disabling restores the underlying game option.
 
-See [release notes](RELEASE_NOTES.md) for validation limits and device checks. TPS bypass is experimental and detects incompatible native code. Noclip, changed speed/TPS and hitboxes mark the attempt; the indicator covers this mod only. VSync switching is Windows-only.
+Only these two settings remain. No CBF, custom menu, Tab handler, floating buttons, HUD, cheat indicator, speedhack, TPS/FPS bypass, VSync/Smooth Fix override, song replacement or main-level unlocks.
 
-## Build
-Use Geode SDK v6.0.0-alpha.1 with a C++23 compiler. `GEODE_SDK` must point to the SDK checkout. GitHub Actions builds Win64 and Android64, combines them, checks binary headers and publishes a beta release after all jobs succeed.
+The existing mod ID is retained so Lite replaces the full version after restarting GD. Old full-version settings are ignored.
 
-Core checks: `g++ -std=c++23 -O2 -Wall -Wextra -Werror tests/core_test.cpp -o core_test && ./core_test`.
+[Releases](https://github.com/dim5lbongE/Alpha-hack/releases)
 
-Technical reference: [Geode SDK](https://github.com/geode-sdk/geode) and [Eclipse Menu](https://git.eclipse.menu/EclipseMenu/EclipseMenu) were consulted for engine hook behavior and native tick-count architecture. No game executable is distributed here.
-
-The green/red dot policy and Pointercrate source links are documented in [release notes](RELEASE_NOTES.md). No Alpha wordmark is shown on gameplay or the main screen.
+CI builds both platforms and verifies native binary headers before publication. Actual in-game device testing has not been performed.
