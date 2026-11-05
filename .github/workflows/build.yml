@@ -1,0 +1,70 @@
+name: Build and release Alpha hack
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: g++ -std=c++23 -O2 -Wall -Wextra -Werror tests/core_test.cpp -o /tmp/core_test && /tmp/core_test
+  build:
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            target: Win64
+          - runner: ubuntu-latest
+            target: Android64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Android NDK
+        if: matrix.target == 'Android64'
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;29.0.14206865" > /dev/null
+      - uses: geode-sdk/build-geode-mod@61a56c697aea9655e3f31c6c1b83870431f30434
+        with:
+          sdk: given
+          cli: v4.0.0
+          target: ${{ matrix.target }}
+          combine: true
+          build-config: Release
+          ccache-variant: ''
+          use-lto: false
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+      - id: package
+        uses: geode-sdk/build-geode-mod/combine@61a56c697aea9655e3f31c6c1b83870431f30434
+        with:
+          cli: v4.0.0
+          zstd: false
+          optimize-pngs: false
+          delete-artifacts: false
+      - name: Verify both binaries
+        env:
+          PACKAGE_DIR: ${{ steps.package.outputs.build-output }}
+        run: |
+          mkdir -p dist
+          cp "$PACKAGE_DIR/dim5l.practice_sync.geode" dist/Alpha_hack_2.3.0-beta.1_Universal.geode
+          python3 scripts/verify_package.py dist/*.geode
+          cd dist
+          sha256sum *.geode > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Alpha-hack-universal
+          path: dist/*
+      - name: Publish beta release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create v2.3.0-beta.1 dist/* --target "$GITHUB_SHA" --title "Alpha hack 2.3.0 beta 1" --notes-file RELEASE_NOTES.md --prerelease

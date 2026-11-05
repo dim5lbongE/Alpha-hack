@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.25)
+project(PracticeSync VERSION 2.3.0 LANGUAGES C CXX)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(${PROJECT_NAME} SHARED src/main.cpp)
+if(NOT DEFINED ENV{GEODE_SDK})
+  message(FATAL_ERROR "Set GEODE_SDK to the Geode v6.0.0-alpha.1 SDK directory")
+endif()
+add_subdirectory($ENV{GEODE_SDK} ${CMAKE_BINARY_DIR}/geode)
+setup_geode_mod(${PROJECT_NAME} DONT_INSTALL)
+target_compile_definitions(${PROJECT_NAME} PRIVATE GEODE_MOD_ID="dim5l.practice_sync")
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "dim5l.practice_sync" PREFIX "" SUFFIX "${GEODE_MOD_BINARY_SUFFIX}")
+
