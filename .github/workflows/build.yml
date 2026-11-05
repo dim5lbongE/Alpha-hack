@@ -10,8 +10,19 @@ permissions:
   contents: read
 jobs:
   test:
+    permissions:
+      contents: read
+      actions: write
     runs-on: ubuntu-latest
     steps:
+      - name: Stop superseded builds
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh api "repos/$GH_REPO/actions/runs?per_page=30" --jq '[.workflow_runs[] | select(.name == "Build and release Alpha hack" and .id < ${{ github.run_id }} and .status != "completed") | .id][]' | while read -r run_id; do
+            gh api --method POST "repos/$GH_REPO/actions/runs/$run_id/cancel" || true
+          done
       - uses: actions/checkout@v4
       - run: g++ -std=c++23 -O2 -Wall -Wextra -Werror tests/core_test.cpp -o /tmp/core_test && /tmp/core_test
   build:
