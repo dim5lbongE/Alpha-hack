@@ -1,17 +1,11 @@
-# Alpha hack 2.3.0 Beta
+# Alpha hack
 
-Geometry Dash **2.2091** / Geode **6.0.0-alpha.1**
+PC: **Tab** / Android: **원형 메뉴 버튼**
 
-PC는 **Tab**, 모바일은 **Alpha hack** 버튼으로 메뉴를 엽니다.
+Play · Speed · Video · Physics · HUD · Unlocks · Songs
 
-- **Play**: 연습 음악 동기화, Noclip, 히트박스
-- **Speed**: 0.10~5.00배 슬라이더와 빠른 선택, 음악 배속
-- **Video**: FPS 직접 입력, Windows VSync, Smooth Fix
-- **Physics**: 120~1000 TPS 직접 입력. 240은 기본 물리입니다.
-- **HUD**: 실제 시간 기준 FPS, 시계, 사용 기능을 표시하는 치트 인디케이터, Noclip 정확도
-- **Unlocks**: 아이콘·색상·메인 레벨 잠금 해제
-- **Songs**: 파일 선택으로 노래 교체, 원본 복구
+치트 인디케이터: 초록·빨강 점. Noclip, 변경된 속도·TPS, 실시간 히트박스 사용 이력은 빨강으로 유지됩니다. Smooth Fix는 감속 여부를 확정할 수 없어 켜져 있으면 보수적으로 빨강 표시합니다.
 
-스피드핵은 플레이 중 스케줄러 시간에 배속을 한 번 적용합니다. TPS는 게임 코드를 확인한 뒤 물리 스텝 수를 변경하며, 호환되지 않으면 비활성화됩니다. 변경된 시도는 테스트 모드로 처리합니다. 사용했던 기능을 꺼도 시도 기록 표시는 유지됩니다.
+Pointercrate 규정을 참고했지만 공식 승인 모드는 아닙니다. 초록 점은 다른 모드나 제출 조건을 보증하지 않습니다.
 
-Windows x64와 Android ARM64를 지원하는 베타입니다. 실제 기기에서 게임 실행 검증은 아직 완료하지 않았습니다. 다른 물리 변경 모드와 충돌할 수 있습니다. 치트 인디케이터는 Alpha hack의 기능만 추적합니다.
+GD 2.2091 / Geode 6.0.0-alpha.1 / Windows x64 · Android ARM64

@@ -35,9 +35,12 @@ class $modify(NovaKeys,CCKeyboardDispatcher){
 class $modify(NovaMenu,MenuLayer){
  bool init(){
   if(!MenuLayer::init())return false;nova::load();nova::applyFPS();
+#ifdef GEODE_IS_ANDROID
   auto m=CCMenu::create();m->setPosition({0,0});addChild(m,100);
-  auto l=CCLabelBMFont::create("Alpha hack","bigFont.fnt");l->setScale(.42f);l->setColor({100,220,255});
-  auto b=CCMenuItemSpriteExtra::create(l,this,menu_selector(NovaMenu::onNova));b->setPosition({CCDirector::sharedDirector()->getWinSize().width-64,25});m->addChild(b);return true;
+  auto b=CCMenuItemSpriteExtra::create(nova::launcherSprite(),this,menu_selector(NovaMenu::onNova));
+  b->setPosition({CCDirector::sharedDirector()->getWinSize().width-26,CCDirector::sharedDirector()->getWinSize().height-74});m->addChild(b);
+#endif
+  return true;
  }
  void onNova(CCObject*){nova::openMenu();}
 };
@@ -114,5 +117,5 @@ class $modify(NovaBuiltInSongs,LevelTools){
 };
 $on_mod(Loaded){
  physics::initialize();nova::load();listenForAllSettingChanges([](std::string_view,std::shared_ptr<SettingV3>){nova::load();nova::mark();nova::applyFPS();});
- log::info("Alpha hack 2.3.0 beta loaded. Tab opens the menu.");
+ log::info("Alpha hack 2.3.1 beta loaded. Tab opens the menu.");
 }

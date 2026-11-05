@@ -17,6 +17,8 @@ int main(){
  assert(core::speed(-1)==.1&&core::speed(99)==5);assert(core::speed(std::numeric_limits<double>::quiet_NaN())==1);
  assert(core::tps(0)==120&&core::tps(5000)==1000);assert(core::fps(0)==30&&core::fps(9999)==2000);
  assert(core::reasons(false,true,1,true,240,false)==0);assert(core::reasons(true,true,2,true,480,true)==15);
+ assert(core::reasons(false,false,1,false,240,false,true)==16);
+ assert(core::reasons(false,false,1,false,240,false,false)==0);
  assert(core::dirtyAfterReset(true,true,false));assert(!core::dirtyAfterReset(true,false,false));assert(core::dirtyAfterReset(false,false,true));
  assert(core::accuracy(0,0)==100&&core::accuracy(10,3)==70&&core::accuracy(10,12)==0);
  std::cout<<scenarios<<" timing scenarios + budget, invalid inputs, indicator history and accuracy: PASS\n";

@@ -70,7 +70,7 @@ jobs:
           PACKAGE_DIR: ${{ steps.package.outputs.build-output }}
         run: |
           mkdir -p dist
-          cp "$PACKAGE_DIR/dim5l.practice_sync.geode" dist/Alpha_hack_2.3.0-beta.1_Universal.geode
+          cp "$PACKAGE_DIR/dim5l.practice_sync.geode" dist/Alpha_hack_2.3.1-beta.1_Universal.geode
           python3 scripts/verify_package.py dist/*.geode
           cd dist
           sha256sum *.geode > SHA256SUMS.txt
@@ -81,4 +81,4 @@ jobs:
       - name: Publish beta release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create v2.3.0-beta.1 dist/* --target "$GITHUB_SHA" --title "Alpha hack 2.3.0 beta 1" --notes-file RELEASE_NOTES.md --prerelease
+        run: gh release create v2.3.1-beta.1 dist/* --target "$GITHUB_SHA" --title "Alpha hack 2.3.1 beta 1" --notes-file RELEASE_NOTES.md --prerelease

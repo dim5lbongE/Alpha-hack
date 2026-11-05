@@ -16,8 +16,8 @@ inline TickBatch advance(double dt,double rate,double warp,double& remainder){
  auto count=static_cast<uint32_t>(std::clamp(std::floor(pending/step+.5),0.,2048.));
  double applied=count*step;remainder=pending-applied;return {applied,count};
 }
-inline uint32_t reasons(bool noclip,bool speedOn,double scale,bool tpsOn,double rate,bool hitboxes){
- return (noclip?1u:0u)|((speedOn&&std::abs(speed(scale)-1.)>.0001)?2u:0u)|(customTPS(tpsOn,rate)?4u:0u)|(hitboxes?8u:0u);
+inline uint32_t reasons(bool noclip,bool speedOn,double scale,bool tpsOn,double rate,bool hitboxes,bool smooth=false){
+ return (noclip?1u:0u)|((speedOn&&std::abs(speed(scale)-1.)>.0001)?2u:0u)|(customTPS(tpsOn,rate)?4u:0u)|(hitboxes?8u:0u)|(smooth?16u:0u);
 }
 inline double accuracy(uint64_t n,uint64_t bad){return n?100.*(n-std::min(n,bad))/n:100.;}
 inline bool dirtyAfterReset(bool previous,bool practice,bool enabled){return enabled||(practice&&previous);}

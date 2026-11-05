@@ -6,9 +6,9 @@
   },
   "id": "dim5l.practice_sync",
   "name": "Alpha hack",
-  "version": "2.3.0-beta.1",
+  "version": "2.3.1-beta.1",
   "developer": "dim5l",
-  "description": "Beta: gameplay Speedhack fix, TPS bypass (120-1000), practice sync, FPS, HUD, unlocks and song replacement. Runtime testing required.",
+  "description": "Clean controls, mobile menu button and attempt-aware red/green indicator.",
   "settings": {
     "enabled": {
       "name": "Practice Music Sync",

@@ -1,14 +1,18 @@
-## Alpha hack 2.3.0 beta 1
-Geometry Dash **2.2091**, Geode **6.0.0-alpha.1**, Windows x64 + Android ARM64 in one `.geode`.
+## Alpha hack 2.3.1 beta 1
+GD 2.2091 / Geode 6.0.0-alpha.1. Windows x64 + Android ARM64.
 
-- Speedhack: scheduler delta is scaled once during gameplay; removed the previous physics-only scaling path. Slider 0.10–5.00x with quick presets. Music pitch reapplies when channels change.
-- TPS bypass: custom tick counts and fractional time accumulation, 120–1000 TPS. 240 retains native physics. Native instructions must match before enabling; incompatible signatures and Click Between Frames fail closed. Android implementation is experimental.
-- Cheat indicator: separates currently enabled assists from assists used earlier in this attempt; lists Noclip, Speed, TPS and Hitboxes. Turning an assist off does not clear attempt history. Modified attempts use test mode and suppress percentage saving. This indicator tracks Alpha hack only, not other mods.
-- Brighter UI with seven categories, large toggle rows, numeric FPS/TPS fields, presets and remembered tab. Desktop Tab and mobile Alpha hack button.
-- FPS uses a wall clock, independently of game speed; clock and noclip accuracy remain available.
+- Larger menu labels, stronger contrast, short controls and no persistent explanatory footers.
+- Removed Alpha text launchers from gameplay and the main screen. Windows uses Tab; Android uses a circular three-line button.
+- Cheat indicator is now a small green/red dot at the bottom left, independent of FPS/clock text. No brand, reason list, speed or TPS text is drawn during play.
+- Red history survives turning an assist off and practice checkpoint resets. A fresh normal attempt resets it. The completion dot remains visible even if the in-play indicator setting is off; its verdict is frozen at completion.
 
-### Validation / limitations
-CI runs 864 timing combinations and edge checks, builds both native targets, and verifies PE x64 / ELF ARM64 package contents before publishing. **No in-game runtime validation has been completed.** This is a prerelease, not a claim that the reported bug is confirmed fixed on a device. FPS limits remain subject to hardware/VSync; Android VSync is system-managed. TPS patching may conflict with other physics mods; unavailable TPS is displayed instead of forcing a patch.
+### Indicator policy
+Reviewed Pointercrate's [eligibility guidelines](https://pointercrate.com/guidelines/eligibility/) and [linked allowed-mods spreadsheet](https://docs.google.com/spreadsheets/d/1evE4nXATxRAQWu2Ajs54E6cVUqHBoSid8I7JauJnOzg/edit#gid=1388959524) on 2026-11-05.
 
-### Quick check
-Open Speed, select 0.5x then 2x on a short level; compare movement to 1x. Pause/resume and restart. In Physics compare 240 with 360; verify the availability message. Toggle assists off mid-attempt: MODIFIED should remain until a fresh normal attempt. Practice checkpoint resets retain history.
+Noclip, non-1x speed, non-240 TPS and live hitboxes mark this mod's attempt red. Render FPS does not: Pointercrate permits any FPS in GD 2.2+. Practice music, icon unlocks, clock and other display-only controls do not independently mark red.
+
+Smooth Fix is **conservatively red whenever enabled**. Pointercrate specifically rejects significant slowdown; this implementation cannot reliably measure that condition, so it does not certify a Smooth Fix attempt green. This is stricter than the guideline, not a claim that the option itself is always banned.
+
+The official endscreen-indicator requirement is stated for Mega Hack v7+; Alpha also retains its dot on the completion screen. **Alpha hack is not Pointercrate-approved. Green only means this mod detected none of its flagged settings during the attempt. It does not validate other mods, level copies, live markers, pauses or recording requirements.**
+
+Core timing/history checks and both native builds are required by CI. Actual in-game rendering and gameplay have not been device-tested.
