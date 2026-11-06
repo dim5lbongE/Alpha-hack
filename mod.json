@@ -6,9 +6,9 @@
   },
   "id": "dim5l.practice_sync",
   "name": "Alpha hack lite",
-  "version": "3.1.0-beta.1",
+  "version": "1.0.0",
   "developer": "dim5l",
-  "description": "Icon unlocks, practice music sync and copy bypass in Geode settings.",
+  "description": "Lightweight Geode settings with icon, music, copy and StartPos tools.",
   "settings": {
     "unlock-icons": {
       "name": "Unlock Icons",
@@ -24,6 +24,18 @@
       "name": "Copy Bypass",
       "type": "bool",
       "default": false
+    },
+    "smart-startpos": {
+      "name": "Smart StartPos",
+      "type": "bool",
+      "default": false,
+      "description": "Auto mode, speed, mini and dual from preceding portals. Applies on restart. Classic levels only."
+    },
+    "startpos-switcher": {
+      "name": "StartPos Switcher",
+      "type": "bool",
+      "default": false,
+      "description": "Q / E or arrows. 0 = level start. Switched runs stay in test mode."
     }
   }
 }

@@ -1,17 +1,18 @@
-# Alpha hack lite
+# Alpha hack lite 1.0.0
 GD 2.2091 / Geode 6.0.0-alpha.1. Windows x64 + Android ARM64.
 
 Open **Geode → Installed → Alpha hack lite → Settings**.
 
-- **Unlock Icons**: icons and colors, without changing completion records.
-- **Practice Music Sync**: overrides practice music sync while enabled; disabling restores the underlying game option.
+- Unlock Icons
+- Practice Music Sync
+- Copy Bypass (reopen the level info page after enabling)
+- Smart StartPos (mode, speed, mini, dual; applies on reset)
+- StartPos Switcher (Q / E or bottom arrows; 0 = level start)
 
-- **Copy Bypass**: permits copying protected levels without entering a password. Enable it before opening the level info page.
+Switcher controls appear only in levels with StartPos objects. Switching is blocked while paused and after completion. Switched runs stay in test mode; reopen the level for a normal attempt. Smart StartPos handles classic left-to-right static portals, not arbitrary 2.2 trigger/path simulation.
 
-Only these three settings remain. No CBF, custom menu, Tab handler, floating buttons, HUD, cheat indicator, speedhack, TPS/FPS bypass, VSync/Smooth Fix override, song replacement or main-level unlocks.
+Numbering resets from 3.x to 1.0.0; manually replace the previous package if Geode refuses the lower version, then restart. The mod ID remains `dim5l.practice_sync`.
 
-The existing mod ID is retained so Lite replaces the full version after restarting GD. Old full-version settings are ignored.
+[Downloads](https://github.com/dim5lbongE/Alpha-hack/releases/tag/v1.0.0) · [Release notes](RELEASE_NOTES.md)
 
-[Releases](https://github.com/dim5lbongE/Alpha-hack/releases)
-
-CI builds both platforms and verifies native binary headers before publication. Actual in-game device testing has not been performed.
+Both builds and package headers are verified in CI. Actual in-game device testing has not been performed.

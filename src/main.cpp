@@ -4,6 +4,7 @@
 #include <Geode/modify/PlayLayer.hpp>
 #include <Geode/modify/LevelInfoLayer.hpp>
 using namespace geode::prelude;
+#include "startpos.hpp"
 
 class $modify(LiteIcons, GameManager) {
     bool isIconUnlocked(int id, IconType type) {
@@ -79,6 +80,9 @@ class $modify(LiteCopy, LevelInfoLayer) {
 };
 
 $on_mod(Loaded) {
+    listenForSettingChanges<bool>("startpos-switcher", [](bool) {
+        if(auto p=PlayLayer::get())static_cast<LiteStartPositions*>(p)->refreshControls();
+    });
     listenForSettingChanges<bool>("enabled", [](bool) {
         if (auto play = PlayLayer::get()) static_cast<LitePractice*>(play)->applyMusicSetting();
     });

@@ -1,10 +1,11 @@
-## Alpha hack lite 3.1.0 beta 1
-GD 2.2091 / Geode 6.0.0-alpha.1. Windows x64 + Android ARM64.
+## Alpha hack lite 1.0.0
+Version numbering restarts at **1.0.0** as requested. GD 2.2091 / Geode 6.0.0-alpha.1. Windows x64 + Android ARM64.
 
-Added **Copy Bypass** to Geode's standard settings. Enable it, reopen the level info page, and use the normal copy button. Copy-disabled and password-protected levels use the game's normal clone flow without a password prompt.
+Geode settings now include Unlock Icons, Practice Music Sync, Copy Bypass, Smart StartPos and StartPos Switcher.
 
-The source level's copy/password field is overridden only while building the info UI or entering the clone flow, then restored. Turning the toggle off delegates to normal game behavior.
+- **Smart StartPos:** on reset, infer mode, speed, mini and dual from static portals to the left of each StartPos. Turning it off restores saved manual settings on the next reset. Classic levels only; it does not simulate reverse paths, moving/toggled portals, trigger logic or gravity transitions.
+- **StartPos Switcher:** Q / E or the bottom arrows cycle through StartPos objects ordered by X. 0 is the level beginning. Controls appear only when enabled and StartPos objects exist. Switching clears the active checkpoint, restarts and restarts music. All switched runs remain test runs, including 0; reopen the level for a normal fresh attempt.
 
-Unlock Icons and Practice Music Sync remain. No custom menu, CBF, HUD or timing changes. Install and restart GD; Lite replaces the previous version using the same mod ID.
+The version is lower than 3.x, so Geode may require manually replacing the prior package. Keep only one `dim5l.practice_sync` package and restart GD. No CBF, full mod menu or timing bypass is added.
 
-Both platform builds and binary package verification run in CI. Actual in-game copy behavior has not been device-tested.
+CI builds both platforms and verifies both binaries. Actual gameplay/device testing has not been performed; the 1.0.0 number does not imply runtime validation.
