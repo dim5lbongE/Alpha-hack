@@ -2,6 +2,10 @@ name: Build and release Alpha hack
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - logo.png
+      - .github/workflows/logo.yml
+      - .github/workflows/build.yml
   workflow_dispatch:
 concurrency:
   group: alpha-release-main

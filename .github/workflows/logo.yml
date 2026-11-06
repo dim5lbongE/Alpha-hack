@@ -1,0 +1,43 @@
+name: Package supplied logo
+on:
+  push:
+    branches: [main]
+    paths: [logo.png, .github/workflows/logo.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download verified 1.0.0 binaries
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download v1.0.0 --pattern Alpha_hack_lite_1.0.0_Universal.geode --dir original
+      - name: Add original logo without changing binaries
+        run: |
+          mkdir dist
+          python3 - <<'PY'
+          import pathlib, zipfile, hashlib
+          source = pathlib.Path('original/Alpha_hack_lite_1.0.0_Universal.geode')
+          target = pathlib.Path('dist/Alpha_hack_lite_1.0.0_Universal.geode')
+          logo = pathlib.Path('logo.png').read_bytes()
+          assert logo[:8] == b'\x89PNG\r\n\x1a\n'
+          with zipfile.ZipFile(source) as old, zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED) as new:
+              for info in old.infolist():
+                  if info.filename != 'logo.png': new.writestr(info,old.read(info.filename))
+              new.writestr('logo.png',logo)
+          with zipfile.ZipFile(source) as old, zipfile.ZipFile(target) as new:
+              assert new.read('logo.png') == logo
+              for name in old.namelist():
+                  if name != 'logo.png': assert old.read(name) == new.read(name), name
+          pathlib.Path('dist/SHA256SUMS.txt').write_text(hashlib.sha256(target.read_bytes()).hexdigest()+'  '+target.name+'\n')
+          print('Original image included; all existing package entries unchanged.')
+          PY
+          python3 scripts/verify_package.py dist/*.geode
+      - name: Publish logo edition
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v1.0.0-logo dist/* --target "$GITHUB_SHA" --title "Alpha hack lite 1.0.0 — logo" --notes "Adds the user-supplied Alpha Hack logo. Mod version remains 1.0.0. Windows and Android binaries are byte-identical to v1.0.0; only logo.png is added. Reinstall this package and restart GD to display the logo." --latest
