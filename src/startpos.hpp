@@ -117,14 +117,13 @@ class $modify(LiteStartPositions, PlayLayer) {
         int total=static_cast<int>(starts.size())+1;
         int next=(current+direction+total)%total;
         m_fields->switching=true;
-        m_currentCheckpoint=nullptr;
+        removeAllCheckpoints();
         prepareStarts();
-        setStartPosObject(next?starts[next-1]:nullptr);
         // Every switched run remains a test run, including switching back to 0%.
         m_isTestMode=true;
-        if(m_isPracticeMode)resetLevelFromStart();else resetLevel();
+        switchToStartPosObject(next?starts[next-1]:nullptr);
         m_isTestMode=true;
-        startMusic();updateTestModeLabel();refreshControls();
+        updateTestModeLabel();refreshControls();
         m_fields->switching=false;
         return true;
     }
