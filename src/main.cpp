@@ -6,6 +6,9 @@
 using namespace geode::prelude;
 #include "startpos.hpp"
 
+// mod.json must keep early-load enabled: GD validates saved icons before
+// normal mods load. Install these hooks before that validation so the saved
+// Unlock Icons setting also applies during startup, without altering save data.
 class $modify(LiteIcons, GameManager) {
     bool isIconUnlocked(int id, IconType type) {
         if (Mod::get()->getSettingValue<bool>("unlock-icons") && id > 0 && type != IconType::Item)

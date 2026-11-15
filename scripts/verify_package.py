@@ -5,6 +5,8 @@ with zipfile.ZipFile(path) as z:
     metadata = json.loads(z.read('mod.json'))
     expected = json.loads(pathlib.Path('mod.json').read_text())
     assert metadata['id'] == expected['id'] and metadata['version'] == expected['version']
+    assert metadata['geode'] == expected['geode'] == '6.0.0-alpha.2'
+    assert metadata.get('early-load') is True, 'Icon hooks must load before saved-icon validation'
     dll = z.read('dim5l.practice_sync.dll')
     assert dll[:2] == b'MZ'
     pe = struct.unpack_from('<I', dll, 0x3c)[0]

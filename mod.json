@@ -1,12 +1,12 @@
 {
-  "geode": "6.0.0-alpha.1",
+  "geode": "6.0.0-alpha.2",
   "gd": {
     "android": "2.2091",
     "win": "2.2091"
   },
   "id": "dim5l.practice_sync",
   "name": "Alpha hack lite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "developer": "dim5l",
   "description": "Lightweight Geode settings with icon, music, copy and StartPos tools.",
   "settings": {
@@ -37,5 +37,6 @@
       "default": false,
       "description": "Q / E or arrows. 0 = level start. Switched runs stay in test mode."
     }
-  }
+  },
+  "early-load": true
 }
