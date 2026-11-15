@@ -1,14 +1,14 @@
 name: Build and release Alpha hack
 on:
   push:
-    branches: [main]
+    branches: [main, "fix/**"]
     paths-ignore:
       - logo.png
       - .github/workflows/logo.yml
       - .github/workflows/build.yml
   workflow_dispatch:
 concurrency:
-  group: alpha-release-main
+  group: alpha-build-${{ github.ref }}
   cancel-in-progress: true
 permissions:
   contents: read
@@ -19,14 +19,6 @@ jobs:
       actions: write
     runs-on: ubuntu-latest
     steps:
-      - name: Stop superseded builds
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          gh api "repos/$GH_REPO/actions/runs?per_page=30" --jq '[.workflow_runs[] | select(.name == "Build and release Alpha hack" and .id < ${{ github.run_id }} and .status != "completed") | .id][]' | while read -r run_id; do
-            gh api --method POST "repos/$GH_REPO/actions/runs/$run_id/cancel" || true
-          done
       - uses: actions/checkout@v4
       - run: python3 -m json.tool mod.json > /dev/null
   build:
@@ -74,7 +66,7 @@ jobs:
           PACKAGE_DIR: ${{ steps.package.outputs.build-output }}
         run: |
           mkdir -p dist
-          cp "$PACKAGE_DIR/dim5l.practice_sync.geode" dist/Alpha_hack_lite_1.0.0_Universal.geode
+          cp "$PACKAGE_DIR/dim5l.practice_sync.geode" dist/Alpha_hack_lite_1.0.1_Universal.geode
           python3 scripts/verify_package.py dist/*.geode
           cd dist
           sha256sum *.geode > SHA256SUMS.txt
@@ -82,7 +74,8 @@ jobs:
         with:
           name: Alpha-hack-universal
           path: dist/*
-      - name: Publish beta release
+      - name: Publish release
+        if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create v1.0.0 dist/* --target "$GITHUB_SHA" --title "Alpha hack lite 1.0.0" --notes-file RELEASE_NOTES.md
+        run: gh release create v1.0.1 dist/* --target "$GITHUB_SHA" --title "Alpha hack lite 1.0.1" --notes-file RELEASE_NOTES.md
